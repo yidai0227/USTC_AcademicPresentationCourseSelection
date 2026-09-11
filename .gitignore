@@ -1,0 +1,34 @@
+# 浏览器会话、Cookie、登录状态与缓存：绝不可发布
+ustc_browser_profile/
+
+# 个人提醒记录
+notified_courses.json
+notified_courses.json.tmp
+
+# 本地凭据与配置
+.env
+.env.*
+!.env.example
+*.local
+
+# Python 环境与缓存
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# 日志、IDE 与操作系统文件
+*.log
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
