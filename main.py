@@ -330,7 +330,10 @@ def monitor(page, notified_courses, email_config):
                 print("连续异常达到上限，监控自动停止。")
                 break
         # 使用 Playwright 等待让浏览器事件继续处理；关窗后及时停止。
-        remaining_ms = CHECK_INTERVAL * 1000
+        import random
+
+        # 基础间隔最低 120 秒，每轮额外随机等待 30～60 秒。
+        remaining_ms = (max(CHECK_INTERVAL, 120) + random.randint(30, 60)) * 1000
         while remaining_ms > 0 and not page.is_closed():
             step_ms = min(1000, remaining_ms)
             try:
