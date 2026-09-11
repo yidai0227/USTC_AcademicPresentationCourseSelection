@@ -21,7 +21,7 @@ CHINA_TZ = timezone(timedelta(hours=8))
 PORTAL_URL = "https://yjs1.ustc.edu.cn/gsapp/sys/yjsemaphome/portal/index.do?forceCas=1"
 APP_URL = "https://yjs1.ustc.edu.cn/gsapp/sys/xsbgglappustc/*default/index.do"
 URL = "https://yjs1.ustc.edu.cn/gsapp/sys/xsbgglappustc/modules/xsbgxk/wxbgbgdz.do"
-CHECK_INTERVAL = 120
+CHECK_INTERVAL = 900
 PAGE_SIZE = 50
 MAX_PAGES = 100
 MAX_ERRORS = 5

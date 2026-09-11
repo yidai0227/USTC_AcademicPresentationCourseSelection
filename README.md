@@ -1,16 +1,16 @@
 # USTC 学术报告监听脚本
 
-你还在为抢不到学术报告苦恼么？还在因不知道什么时候上新而慢人一步么？
-来试试2026最新版学术报告监听脚本吧!
+脚本仅供学习参考，本人不对任何不正常的使用行为负责
 
-觉得脚本好用的话，还请点点star，ORZ
+用户不应使用高频次的轮询，请将轮询时间改为五分钟及以上
 
-如果有任何问题（或者交友？）可以发送给我邮件:daiyi031227@gmail.com
+如果有任何问题，可以发送给我邮件:silverhand_dy@163.com
+
 
 ## 功能
 
-监听学术报告系统，出现“尚未截止，人数没有报满”的报告会立即通知你！
-简单几步就可以配置自己的邮箱，推荐使用网易163邮箱（只测试了163邮箱是否可用），当出现可选课的报告就会立即向你发送邮件！
+监听学术报告系统，出现“尚未截止，人数没有报满”的报告会立即在终端中通知
+简单几步就可以配置自己的邮箱，推荐使用网易163邮箱（只测试了163邮箱是否可用），当出现可选课的报告就会立即向你发送邮件
 
 ## 环境要求
 
@@ -21,18 +21,19 @@
 
 ## 安装与运行
 
+首先进入代码所在文件路径下，执行如下命令
+
 命令如下
 ### Windows（PowerShell）
 
 ```powershell
-py -3 -m venv .venv
-source 
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe -m playwright install chromium
-.\.venv\Scripts\python.exe main.py
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python -m playwright install chromium
+python main.py
 ```
 
-如果找不到 `py`，安装 Python 并重新打开终端，或使用已配置好的 `python` 替换第一行的 `py -3`。
 
 ### macOS / Linux
 
@@ -65,10 +66,10 @@ python3 main.py
 | `COURSE_SMTP_HOST` | SMTP SSL 主机 | `smtp.163.com` |
 | `COURSE_SMTP_PORT` | SMTP SSL 端口 | `465` |
 
-需先在邮箱服务中开启 SMTP，并按服务商说明取得授权码（可以自行google一下，很简单）
+需先在邮箱服务中开启 SMTP，并按服务商说明取得授权码（如果没有使用过，可以自行google一下，很简单）
 
 开启邮箱命令如下，将其中的"your-address@example.com"，"recipient@example.com"替换成你自己的邮箱地址
-SMTP码会
+SMTP码在终端中按照提示输入
 
 ### Windows（PowerShell）
 
@@ -90,7 +91,7 @@ Remove-Variable secret
 export COURSE_EMAIL="your-address@example.com"
 export COURSE_EMAIL_AUTH_CODE="$(.venv/bin/python -c 'import getpass; print(getpass.getpass("SMTP 授权码: "))')"
 export COURSE_EMAIL_TO="recipient@example.com"
-.venv/bin/python main.py
+python3 main.py
 
 # 退出脚本后，可清除本终端中的授权码
 unset COURSE_EMAIL_AUTH_CODE
@@ -102,20 +103,7 @@ unset COURSE_EMAIL_AUTH_CODE
 
 在 `main.py` 顶部修改：
 
-- `CHECK_INTERVAL`：检查间隔，单位为秒，默认 120。建议保持温和的访问频率。
-- `QUERY_SETTING`：院系筛选。默认包含计算机科学与技术学院、信息科学技术学院、微电子学院、网络空间安全学院、软件学院、人工智能与数据科学学院、软件学院合肥、软件学院苏州。（信智学部设计的院系，可以根据你自己的需要修改，但是不保证只修改这里就可以成功）
+- `CHECK_INTERVAL`：检查间隔，单位为秒，默认 300。建议保持温和的访问频率。
+- `QUERY_SETTING`：院系筛选。默认包含计算机科学与技术学院、信息科学技术学院、微电子学院、网络空间安全学院、软件学院、人工智能与数据科学学院、软件学院合肥、软件学院苏州。（信智学部涉及的院系）
 
-如需更换，按当前学校系统的查询条件同步修改 `value` 和 `value_display`。（可以询问AI，或者发邮件给我）
-
-`notified_courses.json` 只保存已提醒的报告编号。同一编号只提醒一次，满员后重新出现空位也不会再次提醒；修改院系或邮箱不会自动重置记录。想重新提醒时，先停止脚本，再备份或删除该文件。文件损坏时程序会停止并保留原文件，修复或备份后移走即可重新运行。
-
-浏览器目录和提醒记录均相对于 `main.py` 定位，因此从其他工作目录启动也会使用同一份数据。
-
-
-```bash
-git init
-git add main.py README.md requirements.txt .gitignore tests
-git status --short
-git diff --cached --stat
-```
-
+如需更换，按当前学校系统的查询条件同步修改 `value` 和 `value_display`。
